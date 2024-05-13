@@ -23,13 +23,14 @@
     <div class = "select-button">
         <button onclick = "pickOnce()">1회 뽑기</button>
         <button onclick = "pickTen()">10회 뽑기</button>
-        <button id = "clearcnt" onclick = "clearcnt()">횟수 초기화</button>
-        <p id = "cnt_txt">뽑은 횟수: <span id="cnt">0</span> | 사용한 Gcoin: <span id="gcoin_cnt">0</span></p>
+        <p id = "cnt_txt">뽑은 횟수: <span id="cnt">0</span> | 사용한 Gcoin: <span id="gcoin_cnt">0</span> (약 <span id = "gcoin_money_cnt">0</span>원)</p>
     </div>
 
     <div class="res">
         <p id = "res1"></p>
     </div>
+
+    <button id = "clearcnt" onclick = "clearcnt()">횟수 초기화</button>
 
     <script>
         var cnt = 0;
@@ -108,6 +109,7 @@
             gcoin_cnt += 200;
             $("#cnt").text(cnt);
             $("#gcoin_cnt").text(gcoin_cnt);
+            $("#gcoin_money_cnt").text(gcoin_cnt*13);
             const randomItem = pickRandomItem(package1);
             console.log(`[${randomItem.class}] ${randomItem.name}`);
             $("#res1").text(`[${randomItem.class}] ${randomItem.name}`);
@@ -121,6 +123,7 @@
             gcoin_cnt += 1800;
             $("#cnt").text(cnt);
             $("#gcoin_cnt").text(gcoin_cnt);
+            $("#gcoin_money_cnt").text(gcoin_cnt*13);
             $("#res1").text(``);
             for(var i = 0; i < 10; i++){
                 const randomItem = pickRandomItem(package1);
@@ -137,6 +140,7 @@
             gcoin_cnt = 0;
             $("#cnt").text(cnt);
             $("#gcoin_cnt").text(gcoin_cnt);
+            $("#gcoin_money_cnt").text("0");
         }
 
     </script>
