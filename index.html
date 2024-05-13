@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./public/style.css">
+</head>
+<body>
+    <h1>가챠 시뮬레이션</h1>
+    <p>오늘의 운세는?</p><br>
+    <div class = "select-package">
+        <label for="package">패키지 선택</label>
+        <select name="패키지 선택" id="package">
+            <option value="package1">스모크 박스</option>
+            <option value="package2">산타 도우미</option>
+            <option value="package3">범퍼 블래스터</option>
+        </select>
+    </div>
+
+    <div class = "select-button">
+        <button>1회 뽑기</button>
+        <button>10회 뽑기</button>
+    </div>
+
+    <script>
+    const items = [
+        { name: "[성장] 범퍼 블래스터 - AUG", class: "Legendary", pbt: 0.90000 },
+        { name: "[크로마] 범퍼 블래스터 - AUG (퍼플 핑크)", class: "Ultimate", pbt: 0.40000 },
+        { name: "[배틀스탯] 선데이 펀데이 - M416", class: "Epic", pbt: 1.25000 },
+        { name: "[배틀스탯] 토요일 밤의 열기 - Mk12", class: "Epic", pbt: 1.25000 },
+        { name: "[배틀스탯] 코믹 카니지 - M24", class: "Epic", pbt: 0.70000 },
+        { name: "[배틀스탯] 코믹 카니지 - 드라구노프", class: "Epic", pbt: 0.70000 },
+        { name: "갤럭시 가디언 - SCAR-L", class: "Elite", pbt: 3.00000 },
+        { name: "갤럭시 가디언 - M16A4", class: "Elite", pbt: 3.00000 },
+        { name: "오버 더 레인보우 - UMP45", class: "Elite", pbt: 1.40000 },
+        { name: "오버 더 레인보우 - 미니14", class: "Elite", pbt: 1.40000 },
+        { name: "오버 더 레인보우 - SLR", class: "Elite", pbt: 1.40000 },
+        { name: "서펜트 가든 - QBU", class: "Elite", pbt: 1.40000 },
+        { name: "서펜트 가든 - AKM", class: "Elite", pbt: 1.40000 },
+        { name: "서펜트 가든 - M416", class: "Elite", pbt: 1.40000 },
+        { name: "캔디 볼 - ACE32", class: "Elite", pbt: 1.40000 },
+        { name: "오딘의 선봉대 - AKM", class: "Elite", pbt: 1.40000 },
+        { name: "오딘의 선봉대 - Mk47 뮤턴트", class: "Elite", pbt: 1.40000 },
+        { name: "오딘의 선봉대 - SKS", class: "Elite", pbt: 1.40000 },
+        { name: "버프건 - S1897", class: "Elite", pbt: 1.40000 },
+        { name: "버프건 - Mk47 뮤턴트", class: "Elite", pbt: 1.40000 },
+        { name: "실버 - SCAR-L", class: "Elite", pbt: 1.40000 },
+        { name: "실버 - S12K", class: "Elite", pbt: 1.40000 },
+        { name: "틱톡 - QBZ", class: "Elite", pbt: 1.40000 },
+        { name: "체크 크롬 - 그로자", class: "Rare", pbt: 1.89000 },
+        { name: "체크 크롬 - PP-19 비존", class: "Rare", pbt: 1.89000 },
+        { name: "체크 크롬 - Mk47 뮤턴트", class: "Rare", pbt: 1.89000 },
+        { name: "켈프 - M24", class: "Rare", pbt: 1.89000 },
+        { name: "켈프 - UMP45", class: "Rare", pbt: 1.89000 },
+        { name: "켈프 - O12", class: "Rare", pbt: 1.89000 },
+        { name: "실버 - 벡터", class: "Rare", pbt: 1.89000 },
+        { name: "실버 - UMP45", class: "Rare", pbt: 1.89000 },
+        { name: "실버 - 토미 건", class: "Rare", pbt: 1.89000 },
+        { name: "트라이 스트라이프 - DP-28", class: "Special", pbt: 2.28000 },
+        { name: "트라이 스트라이프 - Deagle", class: "Special", pbt: 2.28000 },
+        { name: "트라이 스트라이프 - 쇠지렛대", class: "Special", pbt: 2.28000 },
+        { name: "투톤 - P92", class: "Special", pbt: 2.28000 },
+        { name: "투톤 - 석궁", class: "Special", pbt: 2.28000 },
+        { name: "투톤 - M16A4", class: "Special", pbt: 2.28000 },
+        { name: "투톤 - 모신 나강", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (초록색) - MP5K", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (초록색) - 벡터", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (파란색) - 모신 나강", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (초록색) - QBU", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (파란색) - VSS", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (파란색) - S686", class: "Special", pbt: 2.28000 },
+        { name: "마린 매트 (파란색) - 낫", class: "Special", pbt: 2.28000 },
+        { name: "실버 - VSS", class: "Special", pbt: 2.28000 },
+        { name: "실버 - S1897", class: "Special", pbt: 2.28000 },
+        { name: "실버 - DP-28", class: "Special", pbt: 2.28000 },
+        { name: "도면", class: "재료", pbt: 0.90000 },
+        { name: "폴리머 (200개)", class: "재료", pbt: 1.00000 },
+        { name: "폴리머 (100개)", class: "재료", pbt: 2.50000 },
+        { name: "폴리머 (50개)", class: "재료", pbt: 7.63000 }
+    ];
+
+    // 랜덤으로 아이템 선택하는 함수
+    function pickRandomItem(items) {
+        // 전체 확률 합 계산
+        const totalPbt = items.reduce((acc, item) => acc + item.pbt, 0);
+
+        // 랜덤 숫자 생성
+        const randomNumber = Math.random() * totalPbt;
+
+        // 랜덤으로 선택된 아이템 찾기
+        let accumulatedPbt = 0;
+        for (const item of items) {
+            accumulatedPbt += item.pbt;
+            if (randomNumber <= accumulatedPbt) {
+                return item;
+            }
+        }
+    }
+
+    const randomItem = pickRandomItem(items);
+    console.log(`[${randomItem.class}] ${randomItem.name}`);
+
+    </script>
+</body>
+</html>
