@@ -22,9 +22,9 @@
 
     <div class = "select-button">
         <button onclick = "pickOnce()">1회 뽑기</button>
-        <button>10회 뽑기</button>
-        <button id = "clearcnt">횟수 초기화</button>
-        <p id = "cnt_txt">뽑은 횟수: <span id="cnt">0</span></p>
+        <button onclick = "pickTen()">10회 뽑기</button>
+        <button id = "clearcnt" onclick = "clearcnt()">횟수 초기화</button>
+        <p id = "cnt_txt">뽑은 횟수: <span id="cnt">0</span> | 사용한 Gcoin: <span id="gcoin_cnt">0</span></p>
     </div>
 
     <div class="res">
@@ -33,6 +33,7 @@
 
     <script>
         var cnt = 0;
+        var gcoin_cnt = 0;
 
         const package1 = [
             { name: "[성장] 범퍼 블래스터 - AUG", class: "Legendary", pbt: 0.90000 },
@@ -104,13 +105,38 @@
 
         function pickOnce(){
             cnt += 1;
+            gcoin_cnt += 200;
+            $("#cnt").text(cnt);
+            $("#gcoin_cnt").text(gcoin_cnt);
             const randomItem = pickRandomItem(package1);
             console.log(`[${randomItem.class}] ${randomItem.name}`);
-            $("#cnt").text(cnt);
             $("#res1").text(`[${randomItem.class}] ${randomItem.name}`);
             if(randomItem.class == "Legendary" || randomItem.class == "Ultimate" || randomItem.name == "도면"){
                 alert(`축하합니다!! [${randomItem.class}] ${randomItem.name}`);
             }
+        }
+
+        function pickTen(){
+            cnt += 10;
+            gcoin_cnt += 1800;
+            $("#cnt").text(cnt);
+            $("#gcoin_cnt").text(gcoin_cnt);
+            $("#res1").text(``);
+            for(var i = 0; i < 10; i++){
+                const randomItem = pickRandomItem(package1);
+                console.log(`[${randomItem.class}] ${randomItem.name}`);
+                $("#res1").append(`[${randomItem.class}] ${randomItem.name}<br>`);
+                if(randomItem.class == "Legendary" || randomItem.class == "Ultimate" || randomItem.name == "도면"){
+                    alert(`축하합니다!! [${randomItem.class}] ${randomItem.name}`);
+                }
+            }
+        }
+
+        function clearcnt(){
+            cnt = 0;
+            gcoin_cnt = 0;
+            $("#cnt").text(cnt);
+            $("#gcoin_cnt").text(gcoin_cnt);
         }
 
     </script>
